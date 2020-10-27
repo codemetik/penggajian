@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Okt 2020 pada 15.48
+-- Waktu pembuatan: 27 Okt 2020 pada 17.11
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.9
 
@@ -211,10 +211,38 @@ INSERT INTO `tb_rols_user` (`id_rols_user`, `id_user`, `id_jabatan`, `tgl_masuk_
 --
 
 CREATE TABLE `tb_tunjangan` (
-  `id_tunjangan` int(11) NOT NULL,
+  `id_tunjangan` char(15) NOT NULL,
   `nama_tunjangan` varchar(50) NOT NULL,
   `nominal_tunjangan` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_tunjangan`
+--
+
+INSERT INTO `tb_tunjangan` (`id_tunjangan`, `nama_tunjangan`, `nominal_tunjangan`) VALUES
+('TUNJ001', 'Kesehatan', '200000'),
+('TUNJ002', 'BPJS', '150000');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_tunjangan_user`
+--
+
+CREATE TABLE `tb_tunjangan_user` (
+  `id_tunjangan_user` int(15) NOT NULL,
+  `id_tunjangan` char(15) NOT NULL,
+  `id_user` char(15) NOT NULL,
+  `tgl_input` varchar(225) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_tunjangan_user`
+--
+
+INSERT INTO `tb_tunjangan_user` (`id_tunjangan_user`, `id_tunjangan`, `id_user`, `tgl_input`) VALUES
+(1, 'TUNJ001', 'USER0000005', '2020-10-27 11:02:55');
 
 -- --------------------------------------------------------
 
@@ -314,6 +342,12 @@ ALTER TABLE `tb_tunjangan`
   ADD PRIMARY KEY (`id_tunjangan`);
 
 --
+-- Indeks untuk tabel `tb_tunjangan_user`
+--
+ALTER TABLE `tb_tunjangan_user`
+  ADD PRIMARY KEY (`id_tunjangan_user`);
+
+--
 -- Indeks untuk tabel `tb_user`
 --
 ALTER TABLE `tb_user`
@@ -342,10 +376,10 @@ ALTER TABLE `tb_olah_absen`
   MODIFY `id_olah_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_tunjangan`
+-- AUTO_INCREMENT untuk tabel `tb_tunjangan_user`
 --
-ALTER TABLE `tb_tunjangan`
-  MODIFY `id_tunjangan` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tb_tunjangan_user`
+  MODIFY `id_tunjangan_user` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

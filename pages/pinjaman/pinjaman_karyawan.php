@@ -83,16 +83,16 @@ $id_pinjaman = $idpinjam . sprintf("%07s", $nOp);
               	<option value="">--Pilih--</option>
                 <?php 
                 $user = mysqli_query($koneksi, "SELECT * FROM tb_user");
-				while ($duser = mysqli_fetch_array($user)) {
-					$cekuser = mysqli_query($koneksi, "SELECT * FROM tb_pinjaman WHERE id_user = '".$duser['id_user']."'");
-					$dcek = mysqli_num_rows($cekuser);
-					if ($dcek > 0) {
-						echo "";
-					}else{
-						echo "<option value='".$duser['id_user']."'>".$duser['nama_user']."</option>";
-					}
-					
-				}
+          				while ($duser = mysqli_fetch_array($user)) {
+          					$cekuser = mysqli_query($koneksi, "SELECT * FROM tb_pinjaman WHERE id_user = '".$duser['id_user']."'");
+          					$dcek = mysqli_num_rows($cekuser);
+          					if ($dcek > 0) {
+          						echo "";
+          					}else{
+          						echo "<option value='".$duser['id_user']."'>".$duser['nama_user']."</option>";
+          					}
+          					
+          				}
                 ?>
               </select>
             </div>
@@ -104,7 +104,7 @@ $id_pinjaman = $idpinjam . sprintf("%07s", $nOp);
                   </div>
                   <?php 
                 date_default_timezone_set('Asia/Jakarta'); 
-				$tgl_pinjam = date("Y-m-d h:i:s");
+				        $tgl_pinjam = date("Y-m-d h:i:s");
                   ?>
                   <input type="text" name="tgl_pinjaman" class="form-control" value="<?= $tgl_pinjam; ?>" readonly>
                 </div>

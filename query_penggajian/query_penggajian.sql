@@ -72,3 +72,5 @@ INNER JOIN tb_user Y ON y.id_user = x.id_user
 
 SELECT * FROM tb_jabatan X
 INNER JOIN tb_gaji Y ON y.id_jabatan = x.id_jabatan
+
+SELECT * FROM tb_tunjangan
