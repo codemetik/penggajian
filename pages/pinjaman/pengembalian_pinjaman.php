@@ -41,7 +41,7 @@ $id_pengembalian = $idkembali . sprintf("%07s", $nOk);
 					</thead>
 					<tbody>
 					<?php 
-					$sql = mysqli_query($koneksi, "SELECT * FROM tb_pengembalian_pinjaman X INNER JOIN tb_user Y ON y.id_user = x.id_user GROUP BY x.id_user DESC");
+					$sql = mysqli_query($koneksi, "SELECT * FROM tb_pengembalian_pinjaman X INNER JOIN tb_user Y ON y.id_user = x.id_user");
 					$no=1;
 					while ($data = mysqli_fetch_array($sql)) { ?>
 						<tr>
@@ -54,7 +54,7 @@ $id_pengembalian = $idkembali . sprintf("%07s", $nOk);
 							<td><?= $data['tgl_pengembalian']; ?></td>
 							<td><?= $data['keterangan']; ?></td>
 							<td>
-								<a href="pages/proses/proses_delete_pengembalian.php?id=<?= $data['id_pengembalian']; ?>" class="btn bg-danger"><i class="fa fa-trash-alt"></i></a>
+								<a href="pages/proses/proses_delete_pengembalian.php?id=<?= $data['id_pengembalian']; ?>" class="btn bg-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><i class="fa fa-trash-alt"></i></a>
 							</td>
 						</tr>
 					<?php }

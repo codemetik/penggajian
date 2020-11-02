@@ -7,7 +7,7 @@
   </div><!-- /.col -->
 </div><!-- /.row -->
 <div class="row">
-	<div class="col-3">
+	<div class="col-2">
 		<a href="?page=input_absen" class="btn btn-primary mb-2"><i class="fa fa-plus"></i> Input Absen</a>
 	</div>
 	<div class="col-3">
@@ -15,7 +15,7 @@
 		if (isset($_POST['tampil'])) {
 			$search = $_POST['search'];
 			$sqli = mysqli_query($koneksi, "SELECT COUNT(*) AS isi FROM tb_absensi X INNER JOIN tb_user Y ON y.id_user = x.id_user
-INNER JOIN tb_rols_user z ON z.id_user = x.id_user INNER JOIN tb_jabatan a ON a.id_jabatan = z.id_jabatan WHERE YEAR(tgl_ab_akhir) = YEAR(NOW()) AND MONTH(tgl_ab_akhir) = MONTH(NOW()) AND z.id_jabatan LIKE '%".$search."%' OR nama_user LIKE '%".$search."%' ");	
+INNER JOIN tb_rols_user z ON z.id_user = x.id_user INNER JOIN tb_jabatan a ON a.id_jabatan = z.id_jabatan WHERE YEAR(tgl_ab_akhir) = YEAR(NOW()) AND MONTH(tgl_ab_akhir) = MONTH(NOW()) AND z.id_jabatan LIKE '%".$search."%' OR nama_user LIKE '%".$search."%' OR MONTH(tgl_ab_akhir) LIKE MONTH('%".$search."%') ");	
 			$cekli = mysqli_fetch_array($sqli);
 			?>
 	<a href="" class="btn bg-danger"><?= $cekli['isi']; ?></a>
@@ -24,10 +24,17 @@ INNER JOIN tb_rols_user z ON z.id_user = x.id_user INNER JOIN tb_jabatan a ON a.
 INNER JOIN tb_rols_user z ON z.id_user = x.id_user INNER JOIN tb_jabatan a ON a.id_jabatan = z.id_jabatan WHERE YEAR(tgl_ab_akhir) = YEAR(NOW()) AND MONTH(tgl_ab_akhir) = MONTH(NOW())"); 
 			$cekli = mysqli_fetch_array($sqli);
 			?>
-	<a href="" class="btn bg-danger"><?= $cekli['isi']; ?></a>
+	<a href="" class="btn bg-success">Jumlah Absensi : <?= $cekli['isi']; ?></a>
 		<?php }
 	?>
 	</div>
+  <div class="col-3">
+    <?php 
+    $ywan = mysqli_query($koneksi, "SELECT COUNT(*) as tot FROM tb_user");
+    $dywan = mysqli_fetch_array($ywan);
+    ?>
+    <a href="" class="btn bg-success">Total Karyawan : <?= $dywan['tot']; ?> </a>
+  </div>
   <div class="col-12">
     <div class="card">
       <div class="card-header bg-blue">
@@ -66,10 +73,22 @@ INNER JOIN tb_rols_user z ON z.id_user = x.id_user INNER JOIN tb_jabatan a ON a.
      	</form>
         </div>
 
+        <div class="card-tools mr-2">
+        <form action="" method="POST">
+          <div class="input-group input-group-sm" style="width: 250px;">
+            <input type="date" name="search" class="form-control float-right" placeholder="Search Periode">
+
+            <div class="input-group-append">
+              <button type="submit" name="tampil" class="btn btn-default"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+        </form>
+        </div>
+
       </div>
       <!-- /.card-header -->
       <div class="card-body table-responsive p-0" style="height: 450px;">
-        <table class="table table-head-fixed text-nowrap">
+        <table class="table table-head-fixed text-nowrap table-hover">
           <thead>
             <tr>
             	<th>No</th>
@@ -88,8 +107,9 @@ INNER JOIN tb_rols_user z ON z.id_user = x.id_user INNER JOIN tb_jabatan a ON a.
             <?php 
             if (isset($_POST['tampil'])) {
             	$search = $_POST['search'];
+
             	$sql = mysqli_query($koneksi, "SELECT * FROM tb_absensi X INNER JOIN tb_user Y ON y.id_user = x.id_user
-INNER JOIN tb_rols_user z ON z.id_user = x.id_user INNER JOIN tb_jabatan a ON a.id_jabatan = z.id_jabatan WHERE YEAR(tgl_ab_akhir) = YEAR(NOW()) AND MONTH(tgl_ab_akhir) = MONTH(NOW()) AND z.id_jabatan LIKE '%".$search."%' OR nama_user LIKE '%".$search."%' ");	
+INNER JOIN tb_rols_user z ON z.id_user = x.id_user INNER JOIN tb_jabatan a ON a.id_jabatan = z.id_jabatan WHERE YEAR(tgl_ab_akhir) = YEAR(NOW()) AND MONTH(tgl_ab_akhir) = MONTH(NOW()) AND z.id_jabatan LIKE '%".$search."%' OR nama_user LIKE '%".$search."%' OR MONTH(tgl_ab_akhir) LIKE MONTH('".$search."') ");	
             }else{
             	$sql = mysqli_query($koneksi, "SELECT * FROM tb_absensi X INNER JOIN tb_user Y ON y.id_user = x.id_user
 INNER JOIN tb_rols_user z ON z.id_user = x.id_user INNER JOIN tb_jabatan a ON a.id_jabatan = z.id_jabatan WHERE YEAR(tgl_ab_akhir) = YEAR(NOW()) AND MONTH(tgl_ab_akhir) = MONTH(NOW())");
@@ -108,7 +128,7 @@ INNER JOIN tb_rols_user z ON z.id_user = x.id_user INNER JOIN tb_jabatan a ON a.
             		<td><?= $data['lembur']; ?></td>
             		<td><?= $data['tgl_ab_awal']." / ".$data['tgl_ab_akhir']; ?></td>
             		<td>
-            			<a href="?page=update_absensi&id=<?= $data['id_absensi']; ?>" class="btn bg-blue"><i class="fa fa-edit"></i></a> || <a href="pages/proses/proses_delete_absensi.php?idabsen=<?= $data['id_absensi']; ?>" class="btn bg-red"><i class="fa fa-trash-alt"></i></a>
+            			<a href="?page=update_absensi&id=<?= $data['id_absensi']; ?>" class="btn bg-blue"><i class="fa fa-edit"></i></a> || <a href="pages/proses/proses_delete_absensi.php?idabsen=<?= $data['id_absensi']; ?>" class="btn bg-red" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><i class="fa fa-trash-alt"></i></a>
             		</td>
             	</tr>
             <?php }

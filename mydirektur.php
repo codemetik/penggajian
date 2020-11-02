@@ -41,7 +41,7 @@
     <a href="mysqlip.php" class="brand-link">
       <img src="img/gaji.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">MySlip</span>
+      <span class="brand-text font-weight-light"><b>PT. ZEUSS</b> ALIANSI</span>
     </a>
 
     <!-- Sidebar -->
@@ -72,59 +72,58 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
+              <i class="nav-icon fas fa-database"></i>
               <p>
-                Penggajian
+                Master Data
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
+                <a href="?pages_direct=data_jabatan" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Absensi Karyawan</p>
-                  <span class="badge badge-info right">1</span>
+                  <p>Data Jabatan</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="?pages_direct=data_karyawan" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Penggajian</p>
-                  <span class="badge badge-info right">2</span>
+                  <p>Data Karyawan</p>
                 </a>
               </li>
-            </ul>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Pinjaman
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="?pages_direct=data_tunjangan" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Pinjaman Karyawan</p>
+                  <p>Data Tunjangan</p>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
+              <i class="nav-icon fas fa-archive"></i>
               <p>
-                Data Karyawan
+                Laporan
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a href="?pages_direct=laporan_absensi" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Jabatan Karyawan</p>
+                  <p>Laporan Absensi</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="?pages_direct=laporan_pinjaman" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Laporan Pinjaman</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="?pages_direct=laporan_penggajian" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Laporan Penggajian</p>
                 </a>
               </li>
             </ul>
@@ -138,25 +137,45 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-12">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
+    <hr>
 
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <!-- isi -->
+        <?php 
+        if (isset($_GET['pages_direct'])) {
+          $page = $_GET['pages_direct'];
+          switch ($page) {
+            case 'home':
+              include "pages_direct/home.php";
+              break;
+            case 'data_jabatan':
+              include "pages_direct/master_data/data_jabatan.php";
+              break;
+            case 'data_karyawan':
+              include "pages_direct/master_data/data_karyawan.php";
+              break;
+            case 'data_tunjangan':
+              include "pages_direct/master_data/data_tunjangan.php";
+              break;
+            case 'laporan_absensi':
+              include "pages_direct/laporan/laporan_absensi.php";
+              break;
+            case 'laporan_pinjaman':
+              include "pages_direct/laporan/laporan_pinjaman.php";
+              break;
+            case 'laporan_penggajian':
+              include "pages_direct/laporan/laporan_penggajian.php";
+              break;
+            
+            default:
+              # code...
+              break;
+          }
+        }else{
+          include "pages_direct/home.php";
+        }
+        ?>
       </div><!--/. container-fluid -->
     </section>
     <!-- /.content -->

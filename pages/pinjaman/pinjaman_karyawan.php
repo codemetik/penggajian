@@ -52,7 +52,7 @@ $id_pinjaman = $idpinjam . sprintf("%07s", $nOp);
 							<td><?= $data['tgl_update']; ?></td>
 							<td><?= $data['keterangan']; ?></td>
 							<td>
-								<a href="?page=update_pinjaman&id=<?= $data['id_pinjaman']; ?>" class="btn bg-blue"><i class="fa fa-edit"></i></a> || <a href="pages/proses/proses_delete_pinjaman.php?id=<?= $data['id_pinjaman']; ?>" class="btn bg-danger"><i class="fa fa-trash-alt"></i></a>
+								<a href="?page=update_pinjaman&id=<?= $data['id_pinjaman']; ?>" class="btn bg-blue"><i class="fa fa-edit"></i></a> || <a href="pages/proses/proses_delete_pinjaman.php?id=<?= $data['id_pinjaman']; ?>" class="btn bg-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><i class="fa fa-trash-alt"></i></a>
 							</td>
 						</tr>
 					<?php }

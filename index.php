@@ -41,7 +41,7 @@
     <a href="index.php" class="brand-link">
       <img src="img/gaji.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">Penggajian</span>
+      <span class="brand-text font-weight-light"><b>PT. ZEUSS</b> ALIANSI</span>
     </a>
 
     <!-- Sidebar -->
@@ -205,21 +205,27 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="?page=jabatan" class="nav-link">
+                <a href="?page=laporan_absensi" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Lap. Absensi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="?page=jabatan" class="nav-link">
+                <a href="?page=laporan_penggajian" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Lap. Penggajian</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="?page=jabatan" class="nav-link">
+                <a href="?page=laporan_pinjaman" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Lap. Pinjaman</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="?page=laporan_tunjangan" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lap. Tunjangan</p>
                 </a>
               </li>
             </ul>
@@ -281,6 +287,18 @@
               break;
             case 'tunjangan_kesehatan':
               include "pages/data_tunjangan/tunjangan_kesehatan.php";
+              break;
+            case 'laporan_absensi':
+              include "pages/laporan/laporan_absensi.php";
+              break;
+            case 'laporan_penggajian':
+              include "pages/laporan/laporan_penggajian.php";
+              break;
+            case 'laporan_pinjaman':
+              include "pages/laporan/laporan_pinjaman.php";
+              break;
+            case 'laporan_tunjangan':
+              include "pages/laporan/laporan_tunjangan.php";
               break;
             
             default:

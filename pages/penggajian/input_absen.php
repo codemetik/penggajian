@@ -16,10 +16,38 @@
 			<div class="card-body">
 			<form action="pages/proses/proses_input_absensi.php" method="POST">
 				<div class="row">
-					<div class="col-sm-12">
+					<div class="col-sm-3">
 						<a href="?page=absensi_karyawan" class="btn bg-blue mb-2">Kembali</a>
 						<a href="" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-xl"><i class="fa fa-plus"></i> Add </a>
 					</div>
+          <div class="col-sm-8">
+            <div class="form-group">
+              <select class="form-control-sm select2" style="width: 100%;">
+                <option value=""> -- Data Karyawan -- </option>
+                <?php 
+                $user = mysqli_query($koneksi, "SELECT * FROM tb_rols_user X INNER JOIN tb_user Y ON  y.id_user = x.id_user INNER JOIN tb_jabatan z ON z.id_jabatan = x.id_jabatan");
+                  while ($duser = mysqli_fetch_array($user)) {
+                    $sqlcek = mysqli_query($koneksi, "SELECT * FROM tb_olah_absen WHERE id_user = '".$duser['id_user']."'");
+                    $cek = mysqli_num_rows($sqlcek);
+                    $ce = mysqli_fetch_array($sqlcek);
+                    $cekabsen = mysqli_query($koneksi, "SELECT * FROM tb_absensi WHERE id_user = '".$duser['id_user']."' AND YEAR(tgl_ab_akhir) LIKE YEAR(NOW()) AND MONTH(tgl_ab_akhir) LIKE MONTH(NOW())");
+                    $ab = mysqli_num_rows($cekabsen);
+
+                    if ($ab > 0) {
+                      echo "";
+                    }else{
+                      if ($cek > 0) {
+                        echo "";
+                      }else{
+                        echo "<option value='" . $duser['id_user'] . "'>" . $duser['nama_user'] ." - ".$duser['nama_jabatan']. "</option>";
+                      }
+                    }
+                    
+                  }
+                ?>
+              </select>
+            </div>
+          </div>
 					<div class="col-sm-12">
 						<div class="table-responsive p-0" style="height: 400px;">
 							<table class="table table-head-fixed text-nowrap table-bordered font-10">
@@ -32,7 +60,8 @@
 										<th>Ijin</th>
 										<th>Lembur</th>
 										<th>Tgl Awal</th>
-										<th>Tgl Akhir</th>		
+										<th>Tgl Akhir</th>
+                    <th>Delete</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -49,6 +78,9 @@
 						<td><input type="text" style="width: 50px;" name="lembur[]" class="form-control-sm" value="<?= $dolah['lembur']; ?>"></td>
 						<td><input type="date" name="tgl_ab_awal[]" class="form-control-sm" value="<?= $dolah['tgl_ab_awal']; ?>"></td>
 						<td><input type="date" name="tgl_ab_akhir[]" class="form-control-sm" value="<?= $dolah['tgl_ab_akhir']; ?>"></td>
+            <td>
+              <a href="pages/proses/proses_delete_olah_absen.php?idolah=<?= $dolah['id_olah_absen']; ?>" class="btn bg-red" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><i class="fa fa-trash-alt"></i></a>
+            </td>
 					</tr>
 					<?php }
 					?>

@@ -52,7 +52,7 @@
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-      <h4 class="modal-title">Input Tunjangan Kesehatan</h4>
+      <h4 class="modal-title">Input Tunjangan Kesehatan Karyawan</h4>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -60,6 +60,9 @@
 <form action="pages/proses/proses_tunjangan_kesehatan.php" method="POST">
     <div class="modal-body">
       <div class="row">
+      	<div class="col-sm-12">
+      		<div class="alert bg-success"><p>Data karyawan yang tertera adalah karyawan yang sudah memiliki masa kerja >= 12 bulan</p></div>
+      	</div>
       	<div class="col-sm-12">
       		<div class="form-group">
               <label>Nama User</label>
@@ -73,7 +76,7 @@
   					//cek jika masa kerja lebih atau sama dengan batas waktu yakni 12 bulan
   					if ($dcek['masa_kerja'] >= 12) {
 
-  						$cektu = mysqli_query($koneksi, "SELECT * FROM tb_tunjangan_user WHERE id_user = '".$dcek['id_user']."'");
+  						$cektu = mysqli_query($koneksi, "SELECT * FROM tb_tunjangan_user WHERE id_user = '".$dcek['id_user']."' AND id_tunjangan = 'TUNJ001'");
   						$tucek = mysqli_num_rows($cektu);
   						//cek jika ada di table tunangan maka tidak ditampilkan 
   						if ($tucek > 0) {
@@ -96,14 +99,14 @@
             	date_default_timezone_set('Asia/Jakarta'); 
 				$tgl_input = date("Y-m-d h:i:s");
             	?>
-            	<input type="text" name="tgl_input" class="form-control" value="<?= $tgl_input; ?>">
+            	<input type="text" name="tgl_input" class="form-control" value="<?= $tgl_input; ?>" readonly>
             </div>
         </div>
       </div>
     </div>
     <div class="modal-footer justify-content-between">
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      <button type="submit" name="simpan" class="btn btn-primary"><i class="fa fa-save"></i> Simpan Perubahan</button>
+      <button type="submit" name="simpan" class="btn btn-primary"><i class="fa fa-save"></i> Simpan Karyawan</button>
     </div>
 </form>
   </div>
