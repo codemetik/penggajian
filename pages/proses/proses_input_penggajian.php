@@ -10,15 +10,22 @@ if (isset($_POST['simpan_gaji'])) {
 	//cek tb_pinjaman
 	$sqlpin = mysqli_query($koneksi, "SELECT * FROM tb_pinjaman WHERE id_user = '".$id_user."'");
 	$dpin = mysqli_num_rows($sqlpin);
+	$dpinjaman = mysqli_fetch_array($sqlpin);
 	if ($dpin > 0 ) {
 		//cek tb_tunjangan
 		$sqltun = mysqli_query($koneksi, "SELECT * FROM tb_tunjangan_user WHERE id_user = '".$id_user."'");
 		$dtun = mysqli_num_rows($sqltun);
 		if ($dtun > 0 ) {
 			
+			//cek tunjangan dulu sebelum insert hanya tb_tunjangan
+			$ccek = mysqli_query($koneksi, "SELECT SUM(nominal_tunjangan) AS tunj FROM tb_tunjangan X INNER JOIN tb_tunjangan_user Y ON y.id_tunjangan = x.id_tunjangan WHERE id_user = '".$id_user."'");
+			$dccek = mysqli_fetch_array($ccek);
+
 			//insert tb_pinjaman dan tb_tunjangan
-			$sql = mysqli_query($koneksi, "SELECT y.id_user, y.id_jabatan, id_gaji,id_absensi, gaji_pokok, hadir, lembur,8 AS jam_perhari, @tot:= 8 * TIMESTAMPDIFF(DAY, tgl_ab_awal,tgl_ab_akhir) AS tot_jamkerja, @upah:= ROUND((gaji_pokok + uang_makan + uang_transport )/@tot) AS upah_prjam, @lembur:= ROUND((gaji_pokok + uang_makan + uang_transport )/@tot) * lembur AS lemb, hadir * 8 * @upah + @lembur - SUM(nominal_tunjangan) - jumlah_pinjaman AS gaji FROM tb_gaji X INNER JOIN tb_rols_user Y ON y.id_jabatan = x.id_jabatan INNER JOIN tb_absensi z ON z.id_user = y.id_user INNER JOIN tb_pinjaman c ON c.id_user = y.id_user INNER JOIN tb_tunjangan_user a ON a.id_user = y.id_user INNER JOIN tb_tunjangan b ON b.id_tunjangan = a.id_tunjangan WHERE y.id_user = '".$id_user."' GROUP BY y.id_user ASC");
+			$sql = mysqli_query($koneksi, "SELECT y.id_user, y.id_jabatan, id_gaji,id_absensi, gaji_pokok, hadir, lembur,8 AS jam_perhari, @tot:= 8 * TIMESTAMPDIFF(DAY, tgl_ab_awal,tgl_ab_akhir) AS tot_jamkerja, @upah:= ROUND((gaji_pokok + uang_makan + uang_transport )/@tot) AS upah_prjam, @lembur:= ROUND((gaji_pokok + uang_makan + uang_transport )/@tot) * lembur AS lemb, @tunjangan := (SELECT SUM(nominal_tunjangan) FROM tb_tunjangan X INNER JOIN tb_tunjangan_user Y ON y.id_tunjangan = x.id_tunjangan WHERE id_user = '".$id_user."') AS nominal_tunj, hadir * 8 * @upah + @lembur - '".$dccek['tunj']."' - jumlah_pinjaman AS gaji FROM tb_gaji X INNER JOIN tb_rols_user Y ON y.id_jabatan = x.id_jabatan INNER JOIN tb_absensi z ON z.id_user = y.id_user INNER JOIN tb_pinjaman c ON c.id_user = y.id_user INNER JOIN tb_tunjangan_user a ON a.id_user = y.id_user INNER JOIN tb_tunjangan b ON b.id_tunjangan = a.id_tunjangan WHERE y.id_user = '".$id_user."' GROUP BY y.id_user ASC");
 			$data = mysqli_fetch_array($sql);
+
+			$sqlpinjamn = mysqli_query($koneksi, "INSERT INTO tb_history_pinjaman(id_user,jumlah_pinjaman,tgl_input_gaji,tgl_periode_gaji) VALUES('".$id_user."','".$dpinjaman['jumlah_pinjaman']."','".$tgl_input."','".$tgl_periode_gaji."')");
 
 			$insert = mysqli_query($koneksi, "INSERT INTO tb_penggajian(id_penggajian, id_user, id_jabatan, id_gaji, id_absensi, gaji_pokok, hadir, lembur, jam_perhari, tot_jamkerja, upah_prjam, upah_lembur, gaji, tgl_periode_gaji, tgl_input) VALUES('$id_penggajian', '".$data['id_user']."', '".$data['id_jabatan']."', '".$data['id_gaji']."', '".$data['id_absensi']."', '".$data['gaji_pokok']."', '".$data['hadir']."', '".$data['lembur']."', '".$data['jam_perhari']."', '".$data['tot_jamkerja']."', '".$data['upah_prjam']."', '".$data['lemb']."', '".$data['gaji']."', '".$tgl_periode_gaji."', '".$tgl_input."')");
 
@@ -35,7 +42,7 @@ if (isset($_POST['simpan_gaji'])) {
 			$insert_tabungan = mysqli_query($koneksi, "INSERT INTO tb_tabungan_tunjangan(id_user, tunjangan_kesehatan, tunjangan_bpjs, tgl_angsuran) VALUES('".$id_user."','".$dkes['nominal_tunjangan']."','".$dbpjs['nominal_tunjangan']."','".$tgl_input."')");
 			
 
-			if ($insert && $update && $delete && $insert_tabungan) {
+			if ($insert && $update && $delete && $insert_tabungan && $sqlpinjamn) {
 				echo "<script>
 				alert('Data Penggajian Berhasil disimpan');
 				document.location.href = '../../index.php?page=penggajian';
@@ -52,13 +59,15 @@ if (isset($_POST['simpan_gaji'])) {
 			$sql = mysqli_query($koneksi, "SELECT y.id_user, y.id_jabatan, id_gaji,id_absensi, gaji_pokok, hadir, lembur, 8 AS jam_perhari, @tot:= 8 * TIMESTAMPDIFF(DAY, tgl_ab_awal,tgl_ab_akhir) AS tot_jamkerja, @upah:= ROUND((gaji_pokok + uang_makan + uang_transport )/@tot) AS upah_prjam, @lembur:= ROUND((gaji_pokok + uang_makan + uang_transport )/@tot) * lembur AS lemb, (hadir * 8 * @upah + @lembur) - jumlah_pinjaman AS gaji FROM tb_gaji X INNER JOIN tb_rols_user Y ON y.id_jabatan = x.id_jabatan INNER JOIN tb_absensi z ON z.id_user = y.id_user INNER JOIN tb_pinjaman a ON a.id_user = y.id_user WHERE y.id_user = '".$id_user."'");
 			$data = mysqli_fetch_array($sql);
 
+			$sqlpinjamn = mysqli_query($koneksi, "INSERT INTO tb_history_pinjaman(id_user,jumlah_pinjaman,tgl_input_gaji,tgl_periode_gaji) VALUES('".$id_user."','".$dpinjaman['jumlah_pinjaman']."','".$tgl_input."','".$tgl_periode_gaji."')");
+
 			$insert = mysqli_query($koneksi, "INSERT INTO tb_penggajian(id_penggajian, id_user, id_jabatan, id_gaji, id_absensi, gaji_pokok, hadir, lembur,jam_perhari, tot_jamkerja, upah_prjam, upah_lembur , gaji, tgl_periode_gaji, tgl_input) VALUES('$id_penggajian', '".$data['id_user']."', '".$data['id_jabatan']."', '".$data['id_gaji']."', '".$data['id_absensi']."', '".$data['gaji_pokok']."', '".$data['hadir']."', '".$data['lembur']."', '".$data['jam_perhari']."', '".$data['tot_jamkerja']."', '".$data['upah_prjam']."', '".$data['lemb']."','".$data['gaji']."', '".$tgl_periode_gaji."', '".$tgl_input."')");
 
 			$delete = mysqli_query($koneksi, "DELETE FROM tb_pengembalian_pinjaman WHERE id_user = '".$id_user."'");
 			$update = mysqli_query($koneksi, "UPDATE tb_pinjaman SET jumlah_pinjaman = '0', keterangan = 'LUNAS' WHERE id_user = '".$id_user."'");
 
 
-			if ($insert && $update && $delete) {
+			if ($insert && $update && $delete && $sqlpinjamn) {
 				echo "<script>
 				alert('Data Penggajian Berhasil disimpan');
 				document.location.href = '../../index.php?page=penggajian';
@@ -78,12 +87,16 @@ if (isset($_POST['simpan_gaji'])) {
 		$sqltun = mysqli_query($koneksi, "SELECT * FROM tb_tunjangan_user WHERE id_user = '".$id_user."'");
 		$dtun = mysqli_num_rows($sqltun);
 		if ($dtun > 0 ) {
-			
+				
+			//cek tunjangan dulu sebelum insert hanya tb_tunjangan
+			$ccek = mysqli_query($koneksi, "SELECT SUM(nominal_tunjangan) AS tunj FROM tb_tunjangan X INNER JOIN tb_tunjangan_user Y ON y.id_tunjangan = x.id_tunjangan WHERE id_user = '".$id_user."'");
+			$dccek = mysqli_fetch_array($ccek);
+
 			//insert hanya tb_tunjangan
-			$sql = mysqli_query($koneksi, "SELECT y.id_user, y.id_jabatan, id_gaji,id_absensi, gaji_pokok, hadir, lembur, 8 AS jam_perhari, @tot:= 8 * TIMESTAMPDIFF(DAY, tgl_ab_awal,tgl_ab_akhir) AS tot_jamkerja, @upah:= ROUND((gaji_pokok + uang_makan + uang_transport )/@tot) AS upah_prjam, @lembur:= ROUND((gaji_pokok + uang_makan + uang_transport )/@tot) * lembur AS lemb, hadir * 8 * @upah + @lembur - SUM(nominal_tunjangan) AS gaji FROM tb_gaji X INNER JOIN tb_rols_user Y ON y.id_jabatan = x.id_jabatan INNER JOIN tb_absensi z ON z.id_user = y.id_user LEFT JOIN tb_tunjangan_user a ON a.id_user = y.id_user INNER JOIN tb_tunjangan b ON b.id_tunjangan = a.id_tunjangan WHERE y.id_user = '".$id_user."' GROUP BY y.id_user ASC");
+			$sql = mysqli_query($koneksi, "SELECT y.id_user, y.id_jabatan, id_gaji,id_absensi, gaji_pokok, hadir, lembur, 8 AS jam_perhari, @tot:= 8 * TIMESTAMPDIFF(DAY, tgl_ab_awal,tgl_ab_akhir) AS tot_jamkerja, @upah:= ROUND((gaji_pokok + uang_makan + uang_transport )/@tot) AS upah_prjam, @lembur:= ROUND((gaji_pokok + uang_makan + uang_transport )/@tot) * lembur AS lemb, @tunjangan:= (SELECT SUM(nominal_tunjangan) FROM tb_tunjangan X INNER JOIN tb_tunjangan_user Y ON y.id_tunjangan = x.id_tunjangan WHERE id_user = '".$id_user."') AS nominal_tunj, hadir * 8 * @upah + @lembur - '".$dccek['tunj']."' AS gajian FROM tb_gaji X INNER JOIN tb_rols_user Y ON y.id_jabatan = x.id_jabatan INNER JOIN tb_absensi z ON z.id_user = y.id_user LEFT JOIN tb_tunjangan_user a ON a.id_user = y.id_user INNER JOIN tb_tunjangan b ON b.id_tunjangan = a.id_tunjangan WHERE y.id_user = '".$id_user."' GROUP BY y.id_user ASC");
 			$data = mysqli_fetch_array($sql);
 
-			$insert = mysqli_query($koneksi, "INSERT INTO tb_penggajian(id_penggajian, id_user, id_jabatan, id_gaji, id_absensi, gaji_pokok, hadir, lembur,jam_perhari, tot_jamkerja, upah_prjam, upah_lembur, gaji, tgl_periode_gaji, tgl_input) VALUES('$id_penggajian', '".$data['id_user']."', '".$data['id_jabatan']."', '".$data['id_gaji']."', '".$data['id_absensi']."', '".$data['gaji_pokok']."', '".$data['hadir']."', '".$data['lembur']."','".$data['jam_perhari']."', '".$data['tot_jamkerja']."', '".$data['upah_prjam']."', '".$data['lemb']."','".$data['gaji']."', '".$tgl_periode_gaji."', '".$tgl_input."')");
+			$insert = mysqli_query($koneksi, "INSERT INTO tb_penggajian(id_penggajian, id_user, id_jabatan, id_gaji, id_absensi, gaji_pokok, hadir, lembur,jam_perhari, tot_jamkerja, upah_prjam, upah_lembur, gaji, tgl_periode_gaji, tgl_input) VALUES('$id_penggajian', '".$data['id_user']."', '".$data['id_jabatan']."', '".$data['id_gaji']."', '".$data['id_absensi']."', '".$data['gaji_pokok']."', '".$data['hadir']."', '".$data['lembur']."','".$data['jam_perhari']."', '".$data['tot_jamkerja']."', '".$data['upah_prjam']."', '".$data['lemb']."','".$data['gajian']."', '".$tgl_periode_gaji."', '".$tgl_input."')");
 
 			//mendapatkan nominal_tunjangan kesehatan
 			$sqlkes = mysqli_query($koneksi, "SELECT x.id_user, y.id_tunjangan , nominal_tunjangan FROM tb_penggajian X INNER JOIN tb_tunjangan_user Y ON y.id_user = x.id_user INNER JOIN tb_tunjangan z ON z.id_tunjangan = y.id_tunjangan WHERE y.id_tunjangan = 'TUNJ001' AND x.id_user = '".$id_user."'");

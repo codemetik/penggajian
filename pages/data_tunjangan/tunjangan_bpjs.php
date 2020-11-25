@@ -2,18 +2,18 @@
   <div class="col-sm-12">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Tunjangan</a></li>
-      <li class="breadcrumb-item active">Tunjangan BPJS</li>
+      <li class="breadcrumb-item active">BPJS Ketenaga Kerjaan</li>
     </ol>
   </div><!-- /.col -->
 </div><!-- /.row -->
 <div class="row">
 	<div class="col-3">
-		<a href="" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-default"><i class="fa fa-plus"></i> Add Tunjangan</a>
+		<a href="" class="btn bg-dark mb-2" data-toggle="modal" data-target="#modal-default"><i class="fa fa-plus"></i> Add Tunjangan</a>
 	</div>
 	<div class="col-sm-12">
 		<div class="card">
-			<div class="card-header bg-blue">
-				<h3 class="card-title">Tunjangan BPJS</h3>
+			<div class="card-header bg-dark">
+				<h3 class="card-title">Tunjangan BPJS Ketenaga Kerjaan</h3>
 			</div>
 			<div class="card-body table-responsive p-0" style="height: 450px;">
 				<table class="table table-head-fixed text-nowrap font-10">
@@ -51,8 +51,8 @@
 <div class="modal fade" id="modal-default">
 <div class="modal-dialog">
   <div class="modal-content">
-    <div class="modal-header">
-      <h4 class="modal-title">Input Tunjangan Kesehatan Karyawan</h4>
+    <div class="modal-header bg-dark">
+      <h4 class="modal-title">Input BPJS Ketenaga kerjaan Karyawan</h4>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -61,7 +61,7 @@
     <div class="modal-body">
       <div class="row">
       	<div class="col-sm-12">
-      		<div class="alert bg-success"><p>Data karyawan yang tertera adalah karyawan yang sudah memiliki masa kerja >= 12 bulan</p></div>
+      		<div class="alert bg-orange"><p>Data karyawan yang tertera adalah karyawan yang sudah memiliki masa kerja >= 12 bulan</p></div>
       	</div>
       	<div class="col-sm-12">
       		<div class="form-group">
@@ -106,7 +106,7 @@
     </div>
     <div class="modal-footer justify-content-between">
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      <button type="submit" name="simpan" class="btn btn-primary"><i class="fa fa-save"></i> Simpan Karyawan</button>
+      <button type="submit" name="simpan" class="btn bg-dark"><i class="fa fa-save"></i> Simpan Karyawan</button>
     </div>
 </form>
   </div>

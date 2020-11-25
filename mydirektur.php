@@ -18,15 +18,15 @@
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-user"></i>
         </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right bg-orange">
           <span class="dropdown-item dropdown-header">SETTINGS</span>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
+          <a href="mydirektur.php?pages_direct=profile" class="dropdown-item">
             <i class="fas fa-user mr-2"></i> Profile
           </a>
           <div class="dropdown-divider"></div>
           <a href="logout.php" class="dropdown-item">
-            <i class="fas fa-user mr-2"></i> Logout
+            <i class="fas fa-sign-out-alt mr-2"></i> Logout
           </a>
           <a href="#" class="dropdown-item dropdown-footer">-</a>
         </div>
@@ -36,9 +36,9 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-primary bg-orange elevation-4">
     <!-- Brand Logo -->
-    <a href="mysqlip.php" class="brand-link">
+    <a href="mydirektur.php?pages_direct=home" class="brand-link bg-orange">
       <img src="img/gaji.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light"><b>PT. ZEUSS</b> ALIANSI</span>
@@ -52,7 +52,7 @@
           <img src="dist/img/user4-128x128.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?= $_SESSION['nama_user']; ?> &raquo; <p><?= $_SESSION['nama_jabatan']; ?></p></a>
+          <a href="mydirektur.php?pages_direct=home" class="d-block text-white"><?= $_SESSION['nama_user']; ?> &raquo; <p><?= $_SESSION['nama_jabatan']; ?></p></a>
         </div>
       </div>
 
@@ -63,7 +63,7 @@
                with font-awesome or any other icon font library -->
 
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="mydirektur.php?pages_direct=home" class="nav-link text-white">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -71,7 +71,7 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link text-white">
               <i class="nav-icon fas fa-database"></i>
               <p>
                 Master Data
@@ -80,19 +80,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="?pages_direct=data_jabatan" class="nav-link">
+                <a href="?pages_direct=data_jabatan" class="nav-link text-white">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Jabatan</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="?pages_direct=data_karyawan" class="nav-link">
+                <a href="?pages_direct=data_karyawan" class="nav-link text-white">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Karyawan</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="?pages_direct=data_tunjangan" class="nav-link">
+                <a href="?pages_direct=data_tunjangan" class="nav-link text-white">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Tunjangan</p>
                 </a>
@@ -100,7 +100,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link text-white">
               <i class="nav-icon fas fa-archive"></i>
               <p>
                 Laporan
@@ -109,19 +109,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="?pages_direct=laporan_absensi" class="nav-link">
+                <a href="?pages_direct=laporan_absensi" class="nav-link text-white">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Laporan Absensi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="?pages_direct=laporan_pinjaman" class="nav-link">
+                <a href="?pages_direct=laporan_pinjaman" class="nav-link text-white">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Laporan Pinjaman</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="?pages_direct=laporan_penggajian" class="nav-link">
+                <a href="?pages_direct=laporan_penggajian" class="nav-link text-white">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Laporan Penggajian</p>
                 </a>
@@ -166,6 +166,9 @@
               break;
             case 'laporan_penggajian':
               include "pages_direct/laporan/laporan_penggajian.php";
+              break;
+            case 'profile':
+              include "pages_direct/profile.php";
               break;
             
             default:

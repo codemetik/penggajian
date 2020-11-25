@@ -10,7 +10,7 @@ if (isset($_POST['simpan_olah_absen'])) {
 	$ijin = $_POST['ijin'];
 	$lembur = $_POST['lembur'];
 
-	$sqlhadir = mysqli_query($koneksi, "SELECT TIMESTAMPDIFF(DAY, '$tgl_ab_awal', '$tgl_ab_akhir') + 1 AS hadir");
+	$sqlhadir = mysqli_query($koneksi, "SELECT TIMESTAMPDIFF(DAY, '$tgl_ab_awal', '$tgl_ab_akhir') AS hadir");
 	$dhadir = mysqli_fetch_array($sqlhadir);
 
 	$tothadir = $dhadir['hadir'] - ($sakit + $ijin);

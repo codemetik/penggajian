@@ -16,15 +16,15 @@
 				<?php 
 				if (isset($_POST['tampil'])) {
 					$search = $_POST['search'];
-					$sql = mysqli_query($koneksi, "SELECT CONCAT(tgl_ab_awal,' & ',tgl_ab_akhir) AS tgl, TIMESTAMPDIFF(DAY, tgl_ab_awal, tgl_ab_akhir) AS jrk FROM tb_absensi GROUP BY tgl_ab_awal,tgl_ab_akhir DESC");
+					$sql = mysqli_query($koneksi, "SELECT tgl_periode_gaji FROM tb_penggajian WHERE tgl_periode_gaji = '".$search."' GROUP BY tgl_periode_gaji ASC");
 					$dt = mysqli_fetch_array($sql);
-					$show = $dt['tgl'];
+					$show = $dt['tgl_periode_gaji'];
 				}else{
 					$show = "";
 				}
 				?>
 					<div class="input-group input-group-sm" style="width: 150px;">
-						<a href="?page=download&tgl=<?= $show; ?>"><button class="btn bg-dark"> <i class="fa fa-download"></i> Download</button></a>
+						<a href="pages/download/laporan_penggajian.php?tgl=<?= $show; ?>" target="_blank"><button class="btn bg-dark"> <i class="fa fa-download"></i> Download</button></a>
 					</div>
 
 				</div>
@@ -32,7 +32,15 @@
         <div class="card-tools mr-2">
     	<form action="" method="POST">
        	  <div class="input-group input-group-sm" style="width: 300px;">
-            <input type="date" name="search" class="form-control float-right" placeholder="Search">
+            <select name="search" class="form-control float-right">
+              <option>== Pilih Periode Gaji ==</option>
+              <?php 
+              $pilih = mysqli_query($koneksi, "SELECT tgl_periode_gaji FROM tb_penggajian GROUP BY tgl_periode_gaji ASC");
+              while ($dpil = mysqli_fetch_array($pilih)) { ?>
+                <option value="<?= $dpil['tgl_periode_gaji']; ?>"><?= $dpil['tgl_periode_gaji']; ?></option>
+              <?php }
+              ?>
+            </select>
 
             <div class="input-group-append">
               <button type="submit" name="tampil" class="btn btn-default"><i class="fas fa-search"></i></button>
@@ -48,7 +56,8 @@
         <table class="table table-head-fixed text-nowrap table-hover font-12">
           <thead>
             <tr>
-              <th>ID User</th>
+              <th>NIP</th>
+              <th>Nama User</th>
               <th>Gaji Pokok</th>
               <th>Hadir</th>
               <th>Lembur</th>
@@ -65,13 +74,14 @@
             <?php 
             if (isset($_POST['tampil'])) {
               $search = $_POST['search'];
-              $sql = mysqli_query($koneksi, "SELECT * FROM tb_penggajian WHERE YEAR(tgl_input) LIKE YEAR('".$search."') AND MONTH(tgl_input) LIKE MONTH('".$search."') OR id_user LIKE '".$search."' ");  
+              $sql = mysqli_query($koneksi, "SELECT * FROM tb_penggajian X INNER JOIN tb_user Y ON y.id_user = x.id_user INNER JOIN tb_rols_user z ON z.id_user = x.id_user INNER JOIN tb_jabatan a ON a.id_jabatan = z.id_jabatan WHERE tgl_periode_gaji LIKE '".$search."'");
             }else{
-              $sql = mysqli_query($koneksi, "SELECT * FROM tb_penggajian WHERE MONTH(tgl_input) = MONTH(NOW())");
+              $sql = mysqli_query($koneksi, "SELECT * FROM tb_penggajian X INNER JOIN tb_user Y ON y.id_user = x.id_user INNER JOIN tb_rols_user z ON z.id_user = x.id_user INNER JOIN tb_jabatan a ON a.id_jabatan = z.id_jabatan WHERE YEAR(tgl_input) = YEAR(tgl_input) AND MONTH(tgl_input) = MONTH(NOW())");
             }
             while ($data = mysqli_fetch_array($sql)) { ?>
               <tr>
-                <td><?= $data['id_user']; ?></td>
+                <td><?= $data['nip']; ?></td>
+                <td><?= $data['nama_user']; ?></td>
                 <td><?= rupiah($data['gaji_pokok']); ?></td>
                 <td><?= $data['hadir']." hari"; ?></td>
                 <td><?= $data['lembur']." jam"; ?></td>

@@ -16,7 +16,7 @@
 				<?php 
 				if (isset($_POST['tampil'])) {
 					$search = $_POST['search'];
-					$sql = mysqli_query($koneksi, "SELECT CONCAT(tgl_ab_awal,' & ',tgl_ab_akhir) AS tgl, TIMESTAMPDIFF(DAY, tgl_ab_awal, tgl_ab_akhir) AS jrk FROM tb_absensi GROUP BY tgl_ab_awal,tgl_ab_akhir DESC");
+					$sql = mysqli_query($koneksi, "SELECT CONCAT(tgl_ab_awal,'&tglb=',tgl_ab_akhir) AS tgl, TIMESTAMPDIFF(DAY, tgl_ab_awal, tgl_ab_akhir) AS jrk FROM tb_absensi WHERE CONCAT(tgl_ab_awal,' & ',tgl_ab_akhir) = '".$search."' GROUP BY tgl_ab_awal,tgl_ab_akhir DESC");
 					$dt = mysqli_fetch_array($sql);
 					$show = $dt['tgl'];
 				}else{
@@ -24,7 +24,7 @@
 				}
 				?>
 					<div class="input-group input-group-sm" style="width: 150px;">
-						<a href="?page=download&tgl=<?= $show; ?>"><button class="btn bg-dark"> <i class="fa fa-download"></i> Download</button></a>
+						<a href="pages/download/laporan_absensi.php?tgla=<?= $show; ?>" target="_blank"><button class="btn bg-dark"> <i class="fa fa-download"></i> Download</button></a>
 					</div>
 
 				</div>
@@ -54,6 +54,7 @@
 						<tr>
 							<th>ID Absensi</th>
 							<th>ID User</th>
+							<th>NIP</th>
 							<th>Nama User</th>
 							<th>hadir</th>
 							<th>Sakit</th>
@@ -66,15 +67,16 @@
 					<?php 
 					if (isset($_POST['tampil'])) {
 						$search = $_POST['search'];
-						$sql = mysqli_query($koneksi, "SELECT id_absensi, x.id_user, nama_user, hadir, sakit, ijin, lembur, tgl_ab_awal, tgl_ab_akhir ,CONCAT(tgl_ab_awal,' & ',tgl_ab_akhir) AS tgl FROM tb_absensi X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE CONCAT(tgl_ab_awal,' & ',tgl_ab_akhir) = '".$search."'");
+						$sql = mysqli_query($koneksi, "SELECT id_absensi, x.id_user, nip, nama_user, hadir, sakit, ijin, lembur, tgl_ab_awal, tgl_ab_akhir ,CONCAT(tgl_ab_awal,' & ',tgl_ab_akhir) AS tgl FROM tb_absensi X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE CONCAT(tgl_ab_awal,' & ',tgl_ab_akhir) = '".$search."'");
 					}else{
-						$sql = mysqli_query($koneksi, "SELECT id_absensi, x.id_user, nama_user, hadir, sakit, ijin, lembur, tgl_ab_awal, tgl_ab_akhir ,CONCAT(tgl_ab_awal,' & ',tgl_ab_akhir) AS tgl FROM tb_absensi X INNER JOIN tb_user Y ON y.id_user = x.id_user");	
+						$sql = mysqli_query($koneksi, "SELECT id_absensi, x.id_user, nip, nama_user, hadir, sakit, ijin, lembur, tgl_ab_awal, tgl_ab_akhir ,CONCAT(tgl_ab_awal,' & ',tgl_ab_akhir) AS tgl FROM tb_absensi X INNER JOIN tb_user Y ON y.id_user = x.id_user");	
 					}
 					
 					while ($data = mysqli_fetch_array($sql)) { ?>
 						<tr>
 							<td><?= $data['id_absensi']; ?></td>
 							<td><?= $data['id_user']; ?></td>
+							<td><?= $data['nip'] ?></td>
 							<td><?= $data['nama_user']; ?></td>
 							<td><?= $data['hadir']; ?></td>
 							<td><?= $data['sakit']; ?></td>

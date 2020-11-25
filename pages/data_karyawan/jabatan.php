@@ -9,7 +9,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="card">
-			<div class="card-header bg-blue">
+			<div class="card-header bg-dark">
 			<h3 class="card-title">Data Jabatan + Gaji</h3>
 
 			<div class="card-tools">
@@ -56,7 +56,7 @@
 							<td><?= rupiah($data['uang_makan']); ?></td>
 							<td><?= rupiah($data['uang_transport']); ?></td>
 							<td>
-								<a href="?page=update_jabatan&id=<?= $data['id_jabatan']; ?>" class="btn bg-blue"><i class="fa fa-edit"></i></a>
+								<a href="?page=update_jabatan&id=<?= $data['id_jabatan']; ?>" class="btn bg-dark"><i class="fa fa-edit"></i></a>
 							</td>
 						</tr>
 					<?php }

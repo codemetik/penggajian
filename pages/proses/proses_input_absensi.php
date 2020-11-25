@@ -14,7 +14,7 @@ if (isset($_POST['simpan_absen'])) {
 
 	for ($i=0; $i < $isi ; $i++) { 
 
-		$sqlhadir = mysqli_query($koneksi, "SELECT TIMESTAMPDIFF(DAY, '$tgl_ab_awal[$i]', '$tgl_ab_akhir[$i]') + 1 AS hadir");
+		$sqlhadir = mysqli_query($koneksi, "SELECT TIMESTAMPDIFF(DAY, '$tgl_ab_awal[$i]', '$tgl_ab_akhir[$i]') AS hadir");
 		$dhadir[$i] = mysqli_fetch_array($sqlhadir);
 
 		$tothadir[$i] = $dhadir[$i]['hadir'] - ($sakit[$i] + $ijin[$i]);

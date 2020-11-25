@@ -15,7 +15,7 @@ $data = mysqli_fetch_array($sql);
 <div class="row">
 	<div class="col-sm-12">
 		<div class=card>
-			<div class="card-header bg-blue">
+			<div class="card-header bg-dark">
 				Update Data Pinjaman
 			</div>
 			<div class="card-body">
@@ -52,8 +52,8 @@ $data = mysqli_fetch_array($sql);
 						</div>
 					</div>
 					<div class="col-sm-12">
-						<button type="submit" class="btn bg-blue" name="simpan_pinjaman"><i class="fa fa-save"></i> Simpan Perubahan</button>
-						<a href="?page=pinjaman_karyawan" class="btn bg-blue">Cencel</a>
+						<button type="submit" class="btn bg-dark" name="simpan_pinjaman"><i class="fa fa-save"></i> Simpan Perubahan</button>
+						<a href="?page=pinjaman_karyawan" class="btn bg-dark">Cencel</a>
 					</div>
 				</div>
 			</form>

@@ -18,15 +18,15 @@
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-user"></i>
         </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right bg-orange">
           <span class="dropdown-item dropdown-header">SETTINGS</span>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
+          <a href="?page=profil" class="dropdown-item">
             <i class="fas fa-user mr-2"></i> Profile
           </a>
           <div class="dropdown-divider"></div>
           <a href="logout.php" class="dropdown-item">
-            <i class="fas fa-user mr-2"></i> Logout
+            <i class="fas fa-sign-out-alt mr-2"></i> Logout
           </a>
           <a href="#" class="dropdown-item dropdown-footer">-</a>
         </div>
@@ -36,9 +36,9 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-primary bg-orange elevation-4">
     <!-- Brand Logo -->
-    <a href="index.php" class="brand-link">
+    <a href="index.php" class="brand-link bg-orange">
       <img src="img/gaji.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light"><b>PT. ZEUSS</b> ALIANSI</span>
@@ -52,7 +52,7 @@
           <img src="dist/img/user4-128x128.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?= $_SESSION['nama_user']; ?> &raquo; <p><?= $_SESSION['nama_jabatan']; ?></p></a>
+          <a href="index.php" class="d-block text-white"><?= $_SESSION['nama_user']; ?> &raquo; <p><?= $_SESSION['nama_jabatan']; ?></p></a>
         </div>
       </div>
 
@@ -60,7 +60,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item has-treeview">
-            <a href="index.php" class="nav-link">
+            <a href="index.php" class="nav-link text-white">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -73,7 +73,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link text-white">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Absensi
@@ -82,7 +82,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="?page=absensi_karyawan" class="nav-link">
+                <a href="?page=absensi_karyawan" class="nav-link text-white">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Absensi Karyawan</p>
                 </a>
@@ -90,7 +90,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link text-white">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Penggajian
@@ -99,7 +99,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="?page=penggajian" class="nav-link">
+                <a href="?page=penggajian" class="nav-link text-white">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Penggajian</p>
                 </a>
@@ -110,7 +110,7 @@
         <hr style="background-color: grey;" class="mb-0 mt-0">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link text-white">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Pinjaman
@@ -119,13 +119,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="?page=pinjaman_karyawan" class="nav-link">
+                <a href="?page=pinjaman_karyawan" class="nav-link text-white">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pinjaman Karyawan</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="?page=pengembalian_pinjaman" class="nav-link">
+                <a href="?page=pengembalian_pinjaman" class="nav-link text-white">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pengembalian Pinjaman</p>
                 </a>
@@ -133,7 +133,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link text-white">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Tunjangan
@@ -142,15 +142,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="?page=tunjangan_kesehatan" class="nav-link">
+                <a href="?page=tunjangan_kesehatan" class="nav-link text-white">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Tunjangan Kesehatan</p>
+                  <p>BPJS Kesehatan</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="?page=tunjangan_bpjs" class="nav-link">
+                <a href="?page=tunjangan_bpjs" class="nav-link text-white">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Tunjangan BPJS</p>
+                  <p>BPJS Ketenaga Kerjaan</p>
                 </a>
               </li>
             </ul>
@@ -159,7 +159,7 @@
         <hr style="background-color: grey;" class="mb-0 mt-0">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link text-white">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Data Karyawan
@@ -168,7 +168,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="?page=data_karyawan" class="nav-link">
+                <a href="?page=data_karyawan" class="nav-link text-white">
                   <i class="fa fa-users nav-icon"></i>
                   <p>Data Karyawan</p>
                 </a>
@@ -176,7 +176,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link text-white">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Data Asset
@@ -185,7 +185,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="?page=jabatan" class="nav-link">
+                <a href="?page=jabatan" class="nav-link text-white">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Jabatan</p>
                 </a>
@@ -196,7 +196,7 @@
         <hr style="background-color: grey;" class="mb-0 mt-0">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link text-white">
               <i class="nav-icon fas fa-archive"></i>
               <p>
                 Data Laporan
@@ -205,25 +205,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="?page=laporan_absensi" class="nav-link">
+                <a href="?page=laporan_absensi" class="nav-link text-white">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Lap. Absensi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="?page=laporan_penggajian" class="nav-link">
+                <a href="?page=laporan_penggajian" class="nav-link text-white">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Lap. Penggajian</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="?page=laporan_pinjaman" class="nav-link">
+                <a href="?page=laporan_pinjaman" class="nav-link text-white">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Lap. Pinjaman</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="?page=laporan_tunjangan" class="nav-link">
+                <a href="?page=laporan_tunjangan" class="nav-link text-white">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Lap. Tunjangan</p>
                 </a>
@@ -299,6 +299,9 @@
               break;
             case 'laporan_tunjangan':
               include "pages/laporan/laporan_tunjangan.php";
+              break;
+            case 'profil':
+              include "pages/profile.php";
               break;
             
             default:

@@ -9,8 +9,19 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="card">
-			<div class="card-header bg-blue">
-				Laporan Tunjangan
+			<div class="card-header bg-dark">
+				<h5 class="card-title">Laporan Tunjangan</h5>
+				<div class="card-tools">
+					<form action="" method="POST">
+			          <div class="input-group input-group-sm" style="width: 150px;">
+			            <input type="text" name="search" class="form-control float-right" placeholder="Search">
+
+			            <div class="input-group-append">
+			              <button type="submit" name="tampil" class="btn btn-default"><i class="fas fa-search"></i></button>
+			            </div>
+			          </div>
+			      </form>
+				</div>
 			</div>
 			<div class="card-body table-responsive p-0" style="height: 450px;">
 				<table class="table table-head-fixed text-nowrap font-10">
@@ -25,7 +36,13 @@
 					</thead>
 					<tbody>
 					<?php 
-					$sql = mysqli_query($koneksi, "SELECT * FROM tb_tabungan_tunjangan X INNER JOIN tb_user Y ON y.id_user = x.id_user");
+					if (isset($_POST['tampil'])) {
+						$search = $_POST['search'];
+						$sql = mysqli_query($koneksi, "SELECT * FROM tb_tabungan_tunjangan X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE nama_user LIKE '%".$search."%'");
+					}else{
+						$sql = mysqli_query($koneksi, "SELECT * FROM tb_tabungan_tunjangan X INNER JOIN tb_user Y ON y.id_user = x.id_user");	
+					}
+					
 					while ($data = mysqli_fetch_array($sql)) { ?>
 						<tr>
 							<td><?= $data['id_user']; ?></td>

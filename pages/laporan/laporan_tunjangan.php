@@ -27,7 +27,7 @@
 			$show2 = "0";
 		}
 		?>
-		<a href="" class="btn bg-success">Tunjangan Kesehatan : <?= $show1; ?></a> <a href="" class="btn bg-success">Tunjangan BPJS : <?= $show2; ?></a>
+		<a href="" class="btn bg-dark">BPJS Kesehatan: <?= $show1; ?></a> <a href="" class="btn bg-dark">BPJS Ketenaga Kerjaan: <?= $show2; ?></a> <a href="pages/download/laporan_tunjangan.php" target="_blank"><button class="btn bg-dark"> <i class="fa fa-download"></i> Download</button></a>
 	</div>
 	<div class="col-sm-12">
 		<div class="card">
@@ -52,28 +52,34 @@
 					<thead>
 						<tr>
 							<th>ID User</th>
+							<th>NIP</th>
 							<th>Nama User</th>
-							<th>Tunjangan Kesehatan</th>
-							<th>Tunjangan BPJS</th>
+							<th>Jabatan</th>
+							<th>BPJS Kesehatan</th>
+							<th>BPJS Ketenaga Kerjaan</th>
 							<th>Tgl Periode Angsur</th>
+							<th>Masa Kerja</th>
 						</tr>
 					</thead>
 					<tbody>
 					<?php 
 					if (isset($_POST['tampil'])) {
 						$search = $_POST['search'];
-						$sql = mysqli_query($koneksi, "SELECT * FROM tb_tabungan_tunjangan X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE nama_user LIKE '%".$search."%'");
+						$sql = mysqli_query($koneksi, "SELECT x.id_user, nip, nama_user, nama_jabatan, tunjangan_kesehatan, tunjangan_bpjs, tgl_angsuran, TIMESTAMPDIFF(MONTH, tgl_masuk_user,NOW()) AS masa_kerja FROM tb_tabungan_tunjangan X INNER JOIN tb_user Y ON y.id_user = x.id_user INNER JOIN tb_rols_user z ON z.id_user = x.id_user INNER JOIN tb_jabatan a ON a.id_jabatan = z.id_jabatan WHERE nama_user LIKE '%".$search."%'");
 					}else{
-						$sql = mysqli_query($koneksi, "SELECT * FROM tb_tabungan_tunjangan X INNER JOIN tb_user Y ON y.id_user = x.id_user");	
+						$sql = mysqli_query($koneksi, "SELECT x.id_user, nip, nama_user, nama_jabatan, tunjangan_kesehatan, tunjangan_bpjs, tgl_angsuran, TIMESTAMPDIFF(MONTH, tgl_masuk_user,NOW()) AS masa_kerja FROM tb_tabungan_tunjangan X INNER JOIN tb_user Y ON y.id_user = x.id_user INNER JOIN tb_rols_user z ON z.id_user = x.id_user INNER JOIN tb_jabatan a ON a.id_jabatan = z.id_jabatan");	
 					}
 					
 					while ($data = mysqli_fetch_array($sql)) { ?>
 						<tr>
 							<td><?= $data['id_user']; ?></td>
+							<td><?= $data['nip']; ?></td>
 							<td><?= $data['nama_user']; ?></td>
+							<td><?= $data['nama_jabatan']; ?></td>
 							<td><?= rupiah($data['tunjangan_kesehatan']); ?></td>
 							<td><?= rupiah($data['tunjangan_bpjs']); ?></td>
 							<td><?= $data['tgl_angsuran']; ?></td>
+							<td><?= $data['masa_kerja']." th"; ?></td>
 						</tr>
 					<?php }
 					?>

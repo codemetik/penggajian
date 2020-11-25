@@ -25,7 +25,7 @@
   </div>
   <!-- /.login-logo -->
   <div class="card">
-    <div class="card-body login-card-body bg-dark">
+    <div class="card-body login-card-body bg-orange">
       <p class="login-box-msg">Silahkan Registrasi disini</p>
 
       <form action="../../index.html" method="post">
@@ -72,14 +72,14 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
+            <button type="submit" class="btn bg-dark btn-block">Register</button>
           </div>
           <!-- /.col -->
         </div>
       </form>
 
       <p class="mb-0">
-        <a href="login.php" class="text-center">Sudah Punya akun? Silahkan Login</a>
+        <a href="login.php" class="text-center text-dark">Sudah Punya akun? Silahkan Login</a>
       </p>
     </div>
     <!-- /.login-card-body -->

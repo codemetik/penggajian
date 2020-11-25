@@ -10,15 +10,15 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="card">
-			<div class="card-header bg-blue">
+			<div class="card-header bg-dark">
 				Input Absensi Karyawan
 			</div>
 			<div class="card-body">
 			<form action="pages/proses/proses_input_absensi.php" method="POST">
 				<div class="row">
 					<div class="col-sm-3">
-						<a href="?page=absensi_karyawan" class="btn bg-blue mb-2">Kembali</a>
-						<a href="" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-xl"><i class="fa fa-plus"></i> Add </a>
+						<a href="?page=absensi_karyawan" class="btn bg-dark mb-2">Kembali</a>
+						<a href="" class="btn bg-dark mb-2" data-toggle="modal" data-target="#modal-xl"><i class="fa fa-plus"></i> Add </a>
 					</div>
           <div class="col-sm-8">
             <div class="form-group">
@@ -79,7 +79,7 @@
 						<td><input type="date" name="tgl_ab_awal[]" class="form-control-sm" value="<?= $dolah['tgl_ab_awal']; ?>"></td>
 						<td><input type="date" name="tgl_ab_akhir[]" class="form-control-sm" value="<?= $dolah['tgl_ab_akhir']; ?>"></td>
             <td>
-              <a href="pages/proses/proses_delete_olah_absen.php?idolah=<?= $dolah['id_olah_absen']; ?>" class="btn bg-red" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><i class="fa fa-trash-alt"></i></a>
+              <a href="pages/proses/proses_delete_olah_absen.php?idolah=<?= $dolah['id_olah_absen']; ?>" class="btn bg-orange" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><i class="fa fa-trash-alt"></i></a>
             </td>
 					</tr>
 					<?php }
@@ -110,7 +110,7 @@
 <div class="modal fade" id="modal-xl">
 <div class="modal-dialog modal-xl">
   <div class="modal-content">
-    <div class="modal-header">
+    <div class="modal-header bg-dark">
       <h4 class="modal-title">Input Absen</h4>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -119,7 +119,7 @@
 <form action="pages/proses/proses_input_olah_absen.php" method="POST">
     <div class="modal-body">
       <div class="row">
-      	<div class="card-body col-sm-3 bg-blue">
+      	<div class="card-body col-sm-3 bg-orange">
       		<div class="form-group">
       			<label>Periode Tanggal Absen</label>
       			<div class="input-group mb-3">
@@ -174,7 +174,7 @@
     </div>
     <div class="modal-footer justify-content-between mt-5">
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      <button type="submit" name="simpan_olah_absen" class="btn btn-primary">Save </button>
+      <button type="submit" name="simpan_olah_absen" class="btn bg-dark">Save </button>
     </div>
 </form>
   </div>

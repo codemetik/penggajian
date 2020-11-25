@@ -9,7 +9,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="card">
-			<div class="card-header bg-blue">
+			<div class="card-header bg-dark">
 				Data Jabatan
 			</div>
 			<div class="card-body table-responsive p-0" style="height: 450px;">

@@ -25,7 +25,7 @@
   </div>
   <!-- /.login-logo -->
   <div class="card">
-    <div class="card-body login-card-body bg-dark">
+    <div class="card-body login-card-body bg-orange">
       <p class="login-box-msg">Silahkan Login disini</p>
 
       <form action="proses_login.php" method="post">
@@ -56,14 +56,14 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" name="login" class="btn btn-primary btn-block">Sign In</button>
+            <button type="submit" name="login" class="btn bg-dark btn-block"><i class="fa fa-sign-in-alt"></i> Sign In</button>
           </div>
           <!-- /.col -->
         </div>
       </form>
 
       <p class="mb-0">
-        <a href="register.php" class="text-center">Register a new membership</a>
+        <!-- <a href="register.php" class="text-center text-dark">Register a new membership</a> -->
       </p>
     </div>
     <!-- /.login-card-body -->

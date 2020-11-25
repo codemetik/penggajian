@@ -18,15 +18,15 @@
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-user"></i>
         </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right bg-orange">
           <span class="dropdown-item dropdown-header">SETTINGS</span>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
+          <a href="myslip.php?pages_slip=mydata" class="dropdown-item">
             <i class="fas fa-user mr-2"></i> Profile
           </a>
           <div class="dropdown-divider"></div>
           <a href="logout.php" class="dropdown-item">
-            <i class="fas fa-user mr-2"></i> Logout
+            <i class="fas fa-sign-out-alt mr-2"></i> Logout
           </a>
           <a href="#" class="dropdown-item dropdown-footer">-</a>
         </div>
@@ -36,9 +36,9 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-primary bg-orange elevation-4">
     <!-- Brand Logo -->
-    <a href="mysqlip.php" class="brand-link">
+    <a href="myslip.php?page=home" class="brand-link bg-orange">
       <img src="img/gaji.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">MySlip</span>
@@ -52,7 +52,7 @@
           <img src="dist/img/user4-128x128.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?= $_SESSION['nama_user']; ?> &raquo; <p><?= $_SESSION['nama_jabatan']; ?></p></a>
+          <a href="myslip.php?page=home" class="d-block text-white"><?= $_SESSION['nama_user']; ?> &raquo; <p><?= $_SESSION['nama_jabatan']; ?></p></a>
         </div>
       </div>
 
@@ -63,7 +63,7 @@
                with font-awesome or any other icon font library -->
 
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="myslip.php?page=home" class="nav-link text-white">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -71,60 +71,64 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link text-white">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Penggajian
+                My Pay
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
+                <a href="myslip.php?pages_slip=payroll" class="nav-link text-white">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Absensi Karyawan</p>
-                  <span class="badge badge-info right">1</span>
+                  <p>Payroll</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="myslip.php?pages_slip=history_pay" class="nav-link text-white">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Penggajian</p>
-                  <span class="badge badge-info right">2</span>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Pinjaman
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Pinjaman Karyawan</p>
+                  <p>History</p>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link text-white">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Data Karyawan
+                Tanggungan
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a href="myslip.php?pages_slip=pinjaman" class="nav-link text-white">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Jabatan Karyawan</p>
+                  <p>Pinjaman</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link text-white">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Tabungan
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="myslip.php?pages_slip=tabungan_kesehatan" class="nav-link text-white">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Kesehatan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="myslip.php?pages_slip=tabungan_bpjs" class="nav-link text-white">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>BPJS</p>
                 </a>
               </li>
             </ul>
@@ -149,6 +153,24 @@
           switch ($page) {
             case 'home':
               include "pages_slip/home.php";
+              break;
+            case 'payroll':
+              include "pages_slip/payroll.php";
+              break;
+            case 'history_pay':
+              include "pages_slip/history_pay.php";
+              break;
+            case 'pinjaman':
+              include "pages_slip/pinjaman.php";
+              break;
+            case 'tabungan_kesehatan':
+              include "pages_slip/tabungan_kesehatan.php";
+              break;
+            case 'tabungan_bpjs':
+              include "pages_slip/tabungan_bpjs.php";
+              break;
+            case 'mydata':
+              include "pages_slip/mydata.php";
               break;
             
             default:

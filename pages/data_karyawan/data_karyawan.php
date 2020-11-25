@@ -29,7 +29,7 @@ $nip = $idn . sprintf("%04s", $nOn);
 </div><!-- /.row -->
 <div class="row">
 	<div class="col-3">
-		<a href="" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-xl"><i class="fa fa-plus"></i> Add User</a>
+		<a href="" class="btn bg-dark mb-2" data-toggle="modal" data-target="#modal-xl"><i class="fa fa-plus"></i> Add User</a>
 	</div>
 	<div class="col-3">
 	<?php 
@@ -51,7 +51,7 @@ INNER JOIN tb_jabatan z ON z.id_jabatan = x.id_jabatan");
 	</div>
   <div class="col-12">
     <div class="card">
-      <div class="card-header bg-blue">
+      <div class="card-header bg-dark">
         <h3 class="card-title">Data Karyawan</h3>
 
         <div class="card-tools">
@@ -120,7 +120,7 @@ INNER JOIN tb_jabatan z ON z.id_jabatan = x.id_jabatan WHERE x.id_jabatan LIKE '
             		<td><?= $data['tgl_masuk_user']; ?></td>
             		<td><?= $data['masa_kerja']." , bln"; ?></td>
             		<td>
-            			<a href="?page=update_karyawan&id=<?= $data['id_user']; ?>" class="btn bg-blue"><i class="fa fa-edit"></i></a> || <a href="pages/proses/proses_delete_user.php?id=<?= $data['id_user']; ?>" class="btn bg-red" onclick="confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash-alt"></i></a>
+            			<a href="?page=update_karyawan&id=<?= $data['id_user']; ?>" class="btn bg-dark"><i class="fa fa-edit"></i></a> || <a href="pages/proses/proses_delete_user.php?id=<?= $data['id_user']; ?>" class="btn bg-orange" onclick="confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash-alt"></i></a>
             		</td>
             	</tr>
             <?php }
@@ -139,8 +139,8 @@ INNER JOIN tb_jabatan z ON z.id_jabatan = x.id_jabatan WHERE x.id_jabatan LIKE '
 <div class="modal-dialog modal-xl">
 <form action="pages/proses/proses_input_user.php" method="POST">
   <div class="modal-content">
-    <div class="modal-header bg-blue">
-      <h4 class="modal-title">INPUT DATA USER BARU</h4>
+    <div class="modal-header bg-dark">
+      <h4 class="modal-title">Input Data User Baru</h4>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -166,15 +166,15 @@ INNER JOIN tb_jabatan z ON z.id_jabatan = x.id_jabatan WHERE x.id_jabatan LIKE '
 				</div>
 				<div class="form-group">
 					<label>Username</label>
-					<input type="text" name="username" class="form-control" required>
+					<input type="text" name="username" id="username" onkeyup="tulis();" class="form-control" required>
 				</div>
 				<div class="form-group">
 					<label>Password</label>
-					<input type="text" name="password" class="form-control" required>
+					<input type="password" name="password" id="password" class="form-control" required>
 				</div>
 				<div class="form-group">
 					<label>Confirm Password</label>
-					<input type="text" name="confirm_password" class="form-control" required>
+					<input type="password" name="confirm_password" id="confirm_password" class="form-control" required>
 				</div>
 			</div>
 			<div class="col-sm-3">
@@ -235,14 +235,14 @@ INNER JOIN tb_jabatan z ON z.id_jabatan = x.id_jabatan WHERE x.id_jabatan LIKE '
 				</div>
 				<div class="form-group">
 					<label>Tgl Masuk User</label>
-					<input type="text" name="tgl_masuk_user" class="form-control" value="<?= $tgl_skrng; ?>" readonly>
+					<input type="date" name="tgl_masuk_user" class="form-control" required>
 				</div>
 			</div>
 		</div>
     </div>
     <div class="modal-footer justify-content-between">
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      <button type="submit" name="simpan" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+      <button type="submit" name="simpan" class="btn bg-dark"><i class="fa fa-save"></i> Save</button>
     </div>
   </div>
   <!-- /.modal-content -->
@@ -251,3 +251,10 @@ INNER JOIN tb_jabatan z ON z.id_jabatan = x.id_jabatan WHERE x.id_jabatan LIKE '
 <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+<script type="text/javascript">
+	function tulis() {
+		var user = document.getElementById('username').value;
+		document.getElementById('password').value = user;
+		document.getElementById('confirm_password').value = user;
+	}
+</script>

@@ -16,7 +16,7 @@ $data = mysqli_fetch_array($sql);
 <div class="row">
 	<div class="col-sm-12">
 		<div class="card">
-			<div class="card-header bg-blue">
+			<div class="card-header bg-dark">
 				<h3 class="card-title">Update Karyawan</h3>
 			</div>
 			<div class="card-body">
@@ -120,10 +120,10 @@ $data = mysqli_fetch_array($sql);
 							</div>
 							<div class="form-group">
 								<label>Tgl Masuk User</label>
-								<input type="text" name="tgl_masuk_user" class="form-control" value="<?= $data['tgl_masuk_user']; ?>" readonly>
+								<input type="date" name="tgl_masuk_user" class="form-control" value="<?= $data['tgl_masuk_user']; ?>">
 							</div>
 							<div class="form-group">
-								<button type="submit" name="simpan_perubahan" class="btn btn-primary"><i class="fa fa-save"></i> Simpan Perubahan</button>
+								<button type="submit" name="simpan_perubahan" class="btn bg-dark"><i class="fa fa-save"></i> Simpan Perubahan</button>
 							</div>
 							<div class="form-group">
 								<a href="index.php?page=data_karyawan">Cencel</a>
@@ -158,7 +158,7 @@ if (isset($_POST['simpan_perubahan'])) {
 
 	$update = mysqli_query($koneksi, "UPDATE tb_user SET username = '".$username."', password = '".$password."', confirm_password = '".$confirm_password."', nama_user = '".$nama_user."', tempat_lahir = '".$tempat_lahir."', tanggal_lahir = '".$tanggal_lahir."', jenis_kelamin = '".$jenis_kelamin."', alamat = '".$alamat."', agama = '".$agama."', no_telp = '".$no_telp."', no_rekening = '".$no_rekening."', nama_bank = '".$nama_bank."', nama_pemilik_rekening = '".$nama_pemilik_rekening."' WHERE id_user = '".$id_user."'");
 
-	$uprol = mysqli_query($koneksi, "UPDATE tb_rols_user SET id_jabatan = '".$id_jabatan."' WHERE id_user = '".$id_user."'");
+	$uprol = mysqli_query($koneksi, "UPDATE tb_rols_user SET id_jabatan = '".$id_jabatan."', tgl_masuk_user = '".$tgl_masuk_user."' WHERE id_user = '".$id_user."'");
 
 	if ($update && $uprol) {
 		echo "<script>

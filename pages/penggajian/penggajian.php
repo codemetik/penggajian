@@ -17,11 +17,11 @@ $id_penggajian = $idgaji . sprintf("%07s", $nOg);
 </div><!-- /.row -->
 <div class="row">
   <div class="col-2">
-    <a href="" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-default"><i class="fa fa-plus"></i> Input Penggajian</a>
+    <a href="" class="btn bg-dark mb-2" data-toggle="modal" data-target="#modal-default"><i class="fa fa-plus"></i> Input Penggajian</a>
   </div>
   <div class="col-12">
     <div class="card">
-      <div class="card-header bg-blue">
+      <div class="card-header bg-dark">
         <h3 class="card-title">Penggajian</h3>
 
       
@@ -106,8 +106,8 @@ $id_penggajian = $idgaji . sprintf("%07s", $nOg);
 
 <div class="modal fade" id="modal-default">
 <div class="modal-dialog modal-default">
-  <div class="modal-content bg-green">
-    <div class="modal-header bg-blue">
+  <div class="modal-content bg-dark">
+    <div class="modal-header bg-orange">
       <h4 class="modal-title">Input Penggajian</h4>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -170,7 +170,7 @@ $id_penggajian = $idgaji . sprintf("%07s", $nOg);
     </div>
     <div class="modal-footer justify-content-between mt-5">
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      <button type="submit" name="simpan_gaji" class="btn btn-primary" onclick="return confirm('Apakah anda yakin ingin menyimpan data ini?')">Save </button>
+      <button type="submit" name="simpan_gaji" class="btn bg-orange" onclick="return confirm('Apakah anda yakin ingin menyimpan data ini?')">Save </button>
     </div>
 </form>
   </div>

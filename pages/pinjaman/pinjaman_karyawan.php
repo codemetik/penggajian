@@ -17,11 +17,11 @@ $id_pinjaman = $idpinjam . sprintf("%07s", $nOp);
 </div><!-- /.row -->
 <div class="row">
 	<div class="col-sm-12">
-		<a href="" class="btn bg-blue mb-2" data-toggle="modal" data-target="#modal-xl"><i class="fa fa-plus"></i> Add Pinjaman</a>
+		<a href="" class="btn bg-dark mb-2" data-toggle="modal" data-target="#modal-xl"><i class="fa fa-plus"></i> Add Pinjaman</a>
 	</div>
 	<div class="col-sm-12">
 		<div class="card">
-			<div class="card-header bg-blue">
+			<div class="card-header bg-dark">
 				Pinjaman
 			</div>
 			<div class="card-body table-responsive p-0" style="height: 400px;">
@@ -52,7 +52,7 @@ $id_pinjaman = $idpinjam . sprintf("%07s", $nOp);
 							<td><?= $data['tgl_update']; ?></td>
 							<td><?= $data['keterangan']; ?></td>
 							<td>
-								<a href="?page=update_pinjaman&id=<?= $data['id_pinjaman']; ?>" class="btn bg-blue"><i class="fa fa-edit"></i></a> || <a href="pages/proses/proses_delete_pinjaman.php?id=<?= $data['id_pinjaman']; ?>" class="btn bg-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><i class="fa fa-trash-alt"></i></a>
+								<a href="?page=update_pinjaman&id=<?= $data['id_pinjaman']; ?>" class="btn bg-dark"><i class="fa fa-edit"></i></a> || <a href="pages/proses/proses_delete_pinjaman.php?id=<?= $data['id_pinjaman']; ?>" class="btn bg-orange" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><i class="fa fa-trash-alt"></i></a>
 							</td>
 						</tr>
 					<?php }
@@ -67,7 +67,7 @@ $id_pinjaman = $idpinjam . sprintf("%07s", $nOp);
 <div class="modal fade" id="modal-xl">
 <div class="modal-dialog modal-xl">
   <div class="modal-content">
-    <div class="modal-header bg-blue">
+    <div class="modal-header bg-dark">
       <h4 class="modal-title">Inpu Pinjaman</h4>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -130,7 +130,7 @@ $id_pinjaman = $idpinjam . sprintf("%07s", $nOp);
     </div>
     <div class="modal-footer justify-content-between">
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      <button type="submit" name="simpan_pinjaman" class="btn btn-primary"><i class="fa fa-save"></i> Simpan Pinjaman</button>
+      <button type="submit" name="simpan_pinjaman" class="btn bg-dark"><i class="fa fa-save"></i> Simpan Pinjaman</button>
     </div>
 </form>
   </div>

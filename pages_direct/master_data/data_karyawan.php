@@ -15,19 +15,19 @@
 INNER JOIN tb_jabatan z ON z.id_jabatan = x.id_jabatan WHERE x.id_jabatan = '".$search."' OR nama_user LIKE '%".$search."%'");
 			$cekli = mysqli_fetch_array($sqli);
 			?>
-	<a href="" class="btn bg-danger mb-2">Jumlah Karyawan : <?= $cekli['isi']; ?></a>
+	<a href="" class="btn bg-dark mb-2">Jumlah Karyawan : <?= $cekli['isi']; ?></a>
 		<?php }else{ 
 			$sqli = mysqli_query($koneksi, "SELECT COUNT(*) AS isi FROM tb_rols_user X INNER JOIN tb_user Y ON y.id_user = x.id_user
 INNER JOIN tb_jabatan z ON z.id_jabatan = x.id_jabatan");
 			$cekli = mysqli_fetch_array($sqli);
 			?>
-	<a href="" class="btn bg-danger mb-2">Jumlah Karyawan : <?= $cekli['isi']; ?></a>
+	<a href="" class="btn bg-dark mb-2">Jumlah Karyawan : <?= $cekli['isi']; ?></a>
 		<?php }
 	?>
 	</div>
   <div class="col-12">
     <div class="card">
-      <div class="card-header bg-blue">
+      <div class="card-header bg-dark">
         <h3 class="card-title">Data Karyawan</h3>
 
         <div class="card-tools">
