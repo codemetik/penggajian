@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Nov 2020 pada 01.16
+-- Waktu pembuatan: 07 Des 2020 pada 06.04
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.9
 
@@ -48,7 +48,8 @@ INSERT INTO `tb_absensi` (`id_absensi`, `id_user`, `hadir`, `sakit`, `ijin`, `le
 (197, 'USER0000007', '29', '1', '1', '10', '2020-10-24', '2020-11-24'),
 (200, 'USER0000006', '27', '1', '3', '12', '2020-10-24', '2020-11-24'),
 (201, 'USER0000005', '27', '1', '3', '8', '2020-10-24', '2020-11-24'),
-(202, 'USER0000010', '23', '4', '4', '13', '2020-10-24', '2020-11-24');
+(202, 'USER0000010', '23', '4', '4', '13', '2020-10-24', '2020-11-24'),
+(203, 'USER0000008', '28', '1', '1', '1', '2020-11-07', '2020-12-07');
 
 -- --------------------------------------------------------
 
@@ -95,7 +96,8 @@ CREATE TABLE `tb_history_pinjaman` (
 
 INSERT INTO `tb_history_pinjaman` (`id_history`, `id_user`, `jumlah_pinjaman`, `tgl_input_gaji`, `tgl_periode_gaji`) VALUES
 (9, 'USER0000007', '700000', '2020-11-25 05:19:38', '2020-11-24'),
-(10, 'USER0000008', '1000000', '2020-11-25 05:19:50', '2020-11-24');
+(10, 'USER0000008', '1000000', '2020-11-25 05:19:50', '2020-11-24'),
+(11, 'USER0000008', '0', '2020-12-07 10:57:06', '2020-12-07');
 
 -- --------------------------------------------------------
 
@@ -221,7 +223,8 @@ INSERT INTO `tb_penggajian` (`id_penggajian`, `id_user`, `id_jabatan`, `id_gaji`
 ('GJ0000003', 'USER0000007', 'JBT003', 'GJ003', '197', '4500000', '29', '10', '8', '248', '19032', '190320', '3905744', '2020-11-24', '2020-11-25 05:19:38'),
 ('GJ0000004', 'USER0000008', 'JBT004', 'GJ004', '196', '4000000', '26', '20', '8', '248', '16613', '332260', '2437764', '2020-11-24', '2020-11-25 05:19:50'),
 ('GJ0000005', 'USER0000009', 'JBT005', 'GJ005', '195', '3500000', '28', '15', '8', '248', '14597', '218955', '3138683', '2020-11-24', '2020-11-25 05:19:59'),
-('GJ0000006', 'USER0000010', 'JBT003', 'GJ003', '202', '4500000', '23', '13', '8', '248', '19032', '247416', '3749304', '2020-11-24', '2020-11-25 05:20:07');
+('GJ0000006', 'USER0000010', 'JBT003', 'GJ003', '202', '4500000', '23', '13', '8', '248', '19032', '247416', '3749304', '2020-11-24', '2020-11-25 05:20:07'),
+('GJ0000007', 'USER0000008', 'JBT004', 'GJ004', '196', '4000000', '26', '20', '8', '248', '16613', '332260', '3437764', '2020-12-07', '2020-12-07 10:57:06');
 
 -- --------------------------------------------------------
 
@@ -292,7 +295,8 @@ CREATE TABLE `tb_tabungan_tunjangan` (
 INSERT INTO `tb_tabungan_tunjangan` (`id_tabungan`, `id_user`, `tunjangan_kesehatan`, `tunjangan_bpjs`, `tgl_angsuran`) VALUES
 (34, 'USER0000005', '200000', '150000', '2020-11-25 05:18:53'),
 (35, 'USER0000008', '200000', '150000', '2020-11-25 05:19:50'),
-(36, 'USER0000009', '200000', '150000', '2020-11-25 05:19:59');
+(36, 'USER0000009', '200000', '150000', '2020-11-25 05:19:59'),
+(37, 'USER0000008', '200000', '150000', '2020-12-07 10:57:06');
 
 -- --------------------------------------------------------
 
@@ -480,13 +484,13 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT untuk tabel `tb_absensi`
 --
 ALTER TABLE `tb_absensi`
-  MODIFY `id_absensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=203;
+  MODIFY `id_absensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=204;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_history_pinjaman`
 --
 ALTER TABLE `tb_history_pinjaman`
-  MODIFY `id_history` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_history` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_jenis_kelamin`
@@ -498,13 +502,13 @@ ALTER TABLE `tb_jenis_kelamin`
 -- AUTO_INCREMENT untuk tabel `tb_olah_absen`
 --
 ALTER TABLE `tb_olah_absen`
-  MODIFY `id_olah_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id_olah_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_tabungan_tunjangan`
 --
 ALTER TABLE `tb_tabungan_tunjangan`
-  MODIFY `id_tabungan` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id_tabungan` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_tunjangan_user`

@@ -39,7 +39,7 @@
   <aside class="main-sidebar sidebar-dark-primary bg-orange elevation-4">
     <!-- Brand Logo -->
     <a href="index.php" class="brand-link bg-orange">
-      <img src="img/gaji.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+      <img src="img/logo.jpeg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light"><b>PT. ZEUSS</b> ALIANSI</span>
     </a>
@@ -49,7 +49,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-2 pb-0 mb-0 d-flex">
         <div class="image">
-          <img src="dist/img/user4-128x128.jpg" class="img-circle elevation-2" alt="User Image">
+          <!-- <img src="dist/img/user4-128x128.jpg" class="img-circle elevation-2" alt="User Image"> -->
         </div>
         <div class="info">
           <a href="index.php" class="d-block text-white"><?= $_SESSION['nama_user']; ?> &raquo; <p><?= $_SESSION['nama_jabatan']; ?></p></a>
@@ -190,6 +190,12 @@
                   <p>Jabatan</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="?page=tunjangan" class="nav-link text-white">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tunjangan</p>
+                </a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -287,6 +293,12 @@
               break;
             case 'tunjangan_kesehatan':
               include "pages/data_tunjangan/tunjangan_kesehatan.php";
+              break;
+            case 'tunjangan':
+              include "pages/data_tunjangan/data_tunjangan.php";
+              break;
+            case 'update_tunjangan':
+              include "pages/data_tunjangan/update_tunjangan.php";
               break;
             case 'laporan_absensi':
               include "pages/laporan/laporan_absensi.php";

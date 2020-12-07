@@ -88,7 +88,7 @@
                         <td><?= $data['tgl_periode_gaji']; ?></td>
                         <td><?= $data['tgl_input']; ?></td>
 						<td>
-							<a href="pages_slip/download/laporan_payroll.php?id=<?= $data['id_user']; ?>&tglin=<?= $data['tgl_input']; ?>" target="_blank" class="btn bg-blue"><i class="fa fa-download"></i></a>
+							<a href="pages_slip/download/laporan_history_pay.php?id=<?= $data['id_user']; ?>&tglper=<?= $data['tgl_periode_gaji']; ?>&tglin=<?= $data['tgl_input']; ?>" target="_blank" class="btn bg-blue"><i class="fa fa-download"></i></a>
 						</td>
 					</tr>
 				<?php }
