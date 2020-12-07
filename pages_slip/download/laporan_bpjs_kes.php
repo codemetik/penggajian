@@ -14,7 +14,7 @@ if (!isset($_SESSION['username'])) {
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
   <title>PT. ZEUSS ALIANSI</title>
-
+  <link rel="icon" href="img/logo.jpeg" type="image/x-icon">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- overlayScrollbars -->

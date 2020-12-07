@@ -14,7 +14,7 @@ if (!isset($_SESSION['id_user'])) {
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
   <title>Penggajian</title>
-  <link rel="icon" href="img/gaji.png" type="image/x-icon">
+  <link rel="icon" href="img/logo.jpeg" type="image/x-icon">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- overlayScrollbars -->
